@@ -1,25 +1,13 @@
-$(document).ready(function() {
-    $(".popup-btn").click(function() {
-      const action = $(this).data("action");
-      const id = $(this).data("id");
-  
-      $.ajax({
-        url: "backend-handler.php",
-        method: "POST",
-        data: { action: action, id: id },
-        success: function(response) {
-          $("#popupContent").html(response);
-          $("#overlay, #popup").fadeIn();
-        },
-        error: function() {
-          $("#popupContent").html("Error loading content.");
-          $("#overlay, #popup").fadeIn();
-        }
-      });
-    });
-  
-    $("#closePopup, #overlay").click(function() {
-      $("#overlay, #popup").fadeOut();
-    });
-  });
-  
+$.ajax({
+  url: "backend-handler.php",      // The backend file or API to send the request to
+  method: "POST",                  // The HTTP method: GET or POST
+  data: { action: action, id: id },// Data sent to the server (from HTML button attributes)
+  success: function(response) {    // Runs when the server returns data successfully
+    $("#popupContent").html(response); // Inserts the result into the popup
+    $("#overlay, #popup").fadeIn();    // Shows the popup and overlay
+  },
+  error: function() {              // Runs if there's an error with the request
+    $("#popupContent").html("Error loading content.");
+    $("#overlay, #popup").fadeIn();
+  }
+});
